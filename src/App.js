@@ -4,9 +4,14 @@ import Person from "./Person/Person";
 
 class App extends Component {
   state = {
+  person : [ {
   'name'  :"hello",
+  },
+  {
   'name2' : "bye"
-
+  } ,
+],
+  showPerson : true 
 
 
   };
@@ -16,6 +21,7 @@ class App extends Component {
     // this.state.persons[0].name = "hardik";  DONT DO THIS
        this.setState({'name':newName})
        console.log(this.state);
+      
 
   }
  
@@ -28,6 +34,13 @@ class App extends Component {
         }   
      )
   }
+
+  togglePersonHandler = () =>
+  {
+    const doesShow = this.state.showPerson;
+    this.setState({showPerson : !doesShow})
+
+  }
   
 
   render() {
@@ -38,20 +51,33 @@ class App extends Component {
         <h1>HI, I am react boy : </h1>
         <p>HELLO MUMBAI</p>
        
-        <button onClick={() => this.switchNameHandler("HARDIK")}>SWITCH NAME</button>
+        <button onClick={this.togglePersonHandler}>HIDE</button>
+  
+  
+    {
+     this.state.showPerson? 
+     <div>
+
         <Person
-          name={this.state.name}
+          name={this.state.person[0].name}
 
         />
         <Person
-         name = {this.state.name2}
+         name = {this.state.person[1].name2}
          click = {this.switchNameHandler.bind(this,"SINGH")}
          nameChange = {this.nameChangeHandler}
         />
+      </div> :null
 
-     </div>
+    }
+    </div>
+     
+
     );
-  }
+    
+
 }
+}
+
 
 export default App;
