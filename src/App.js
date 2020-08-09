@@ -5,15 +5,13 @@ import Person from "./Person/Person";
 class App extends Component {
   state = {
   person : [ {
-  'name'  :"hello",
+  'name'  :"hardik",
   },
   {
-  'name2' : "bye"
+  'name2' : "tanja"
   } ,
 ],
   showPerson : true 
-
-
   };
 
   switchNameHandler = (newName) => {
@@ -24,7 +22,7 @@ class App extends Component {
       
 
   }
- 
+
   nameChangeHandler = (event) => {
     
      this.setState(
@@ -40,44 +38,53 @@ class App extends Component {
     const doesShow = this.state.showPerson;
     this.setState({showPerson : !doesShow})
 
-  }
+  };
+
+
+ 
   
 
   render() {
-   //without using bind keyword first one
-    console.log(this.state);
-    return (
-      <div className="App">
-        <h1>HI, I am react boy : </h1>
-        <p>HELLO MUMBAI</p>
-       
-        <button onClick={this.togglePersonHandler}>HIDE</button>
-  
-  
-    {
-     this.state.showPerson? 
-     <div>
+   
 
+    let persons = null
+    if(this.state.showPerson)
+    {
+       persons = (
+  
+        <div>
+  
         <Person
           name={this.state.person[0].name}
-
+  
         />
         <Person
          name = {this.state.person[1].name2}
          click = {this.switchNameHandler.bind(this,"SINGH")}
          nameChange = {this.nameChangeHandler}
         />
-      </div> :null
-
+      </div>
+  
+       );
+   
+  
+  
     }
-    </div>
-     
 
+    return (
+      <div className="App">
+        <h1>HI, I am react boy : </h1>
+        <p>HELLO MUMBAI</p>
+       
+        <button onClick={this.togglePersonHandler}>HIDE</button>
+    {persons }
+    </div>
+    
     );
     
 
 }
-}
+};
 
 
 export default App;
